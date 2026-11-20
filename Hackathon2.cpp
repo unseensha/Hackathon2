@@ -3,9 +3,12 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "Text.h"
-
+#include<iostream>
 int main() {
-    
+    //ChangeDirectory(GetApplicationDirectory());//got this from the ai overview  needed an absolute path before(it didnt work)
+ //  std::cout<< GetWorkingDirectory();
+    //the paths are broken just fix later
+
     const int screenWidth = 1280;
     const int screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Scene Render Test");
@@ -27,7 +30,7 @@ int main() {
     myScene.addObject(modelObj);
 
     // load stuff again 2d stuff this time
-    Texture2D spriteTex = LoadTexture("C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\sprite.png");
+    Texture2D spriteTex = LoadTexture("assets\\sprite.png");
     Sprite hudSprite(spriteTex, { 20.0f, 80.0f }, 1.0f, 0.0f, WHITE);
     myScene.addSprite(hudSprite);
 
