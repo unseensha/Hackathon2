@@ -14,6 +14,9 @@ FetchContent_MakeAvailable(raylib)
 
 add_executable(Hackathon2
     Hackathon2.cpp
+    main.cpp
+    Traveler.cpp
+    Scene.cpp
     
  "Object.cpp" "Object.h" "Scene.h" "Scene.cpp" "Text.h"  "Sprite.h" )
 target_link_libraries(Hackathon2 PRIVATE raylib)
