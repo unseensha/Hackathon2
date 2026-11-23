@@ -3,7 +3,6 @@
 // Font: [WRITE THE FONT NAME, AUTHOR AND WEBSITE HERE]
 // Music: [WRITE THE SOURCE OF YOUR MUSIC FILE HERE: title, artist, website]
 // raylib functions: https://www.raylib.com/cheatsheet/raylib_cheatsheet_v5.5.pdf
-// Code written with help from Claude (Anthropic), then adapted by our team.
 
 #include <iostream>
 #include <string>
