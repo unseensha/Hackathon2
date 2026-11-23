@@ -17,6 +17,7 @@ add_executable(Hackathon2
     main.cpp
     Traveler.cpp
     Scene.cpp
+    Object.cpp
     
  "Object.cpp" "Object.h" "Scene.h" "Scene.cpp" "Text.h"  "Sprite.h" )
 target_link_libraries(Hackathon2 PRIVATE raylib)
