@@ -1,7 +1,7 @@
 // Game idea inspired by "Papers, Please" by Lucas Pope 
 // Theme: Crawford & Joler, "Calculating Empires", https://calculatingempires.net/
 // Font: [WRITE THE FONT NAME, AUTHOR AND WEBSITE HERE]
-// Music: [WRITE THE SOURCE OF YOUR MUSIC FILE HERE: title, artist, website]
+// Music: https://pixabay.com/music/search/detective/
 // raylib functions: https://www.raylib.com/cheatsheet/raylib_cheatsheet_v5.5.pdf
 
 #include <iostream>
