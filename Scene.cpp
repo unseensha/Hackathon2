@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include <cassert>
 
-Scene::Scene(const std::vector<Object>& objects, const std::vector<Sprite>& twoDimensionalObjects,
+Scene::Scene(const std::vector<Object*>& objects, const std::vector<Sprite*>& twoDimensionalObjects,
     const std::vector<Text>& text, const std::vector<int>& orderArrIndex,
     const std::vector<int>& orderArrType, const Camera& cam, Color background)
     : objects(std::move(objects)),
@@ -29,9 +29,10 @@ Scene::Scene(const Camera& cam, Color background)
 
 
 // 0 is objec t 1 is sprite 2 is rtexr
+//I use cassert I know it from priot knowledge it just makes a helpful popup and stops the progranm when the boolean value isnt true the 
+//&& with the streing is just so I have a message I see when an assert procs just for debugging will hopefully be removed in final build
 
-
-void Scene::addObject(const Object& newObj) {
+void Scene::addObject( Object* newObj) {
     assert(orderArrIndex.size() == orderArrType.size() && "the vectors for print order arent the same q,fhjiafhuiwq");
 
     int storageIdx = static_cast<int>(objects.size());
@@ -40,7 +41,7 @@ void Scene::addObject(const Object& newObj) {
     orderArrType.push_back(0);//tells it to check object array or the corresponding one
 }
 
-void Scene::addObject(const Object& newObj, int index) {
+void Scene::addObject( Object* newObj, int index) {
     assert(orderArrIndex.size() == orderArrType.size() && "the vectors for print order arent the same q,fhjiafhuiwq");
     assert(index >= 0 && static_cast<size_t>(index) <= orderArrIndex.size() && "index you put in is crap");
 
@@ -53,9 +54,9 @@ void Scene::addObject(const Object& newObj, int index) {
 
 
 
+//same as addObject for the rest just spriets and text instead
 
-
-void Scene::addSprite(const Sprite& newSprite) {
+void Scene::addSprite( Sprite* newSprite) {
     assert(orderArrIndex.size() == orderArrType.size() && "the vectors for print order arent the same q,fhjiafhuiwq");
 
     int storageIdx = static_cast<int>(sprites.size());
@@ -64,7 +65,7 @@ void Scene::addSprite(const Sprite& newSprite) {
     orderArrType.push_back(1);
 }
 
-void Scene::addSprite(const Sprite& newSprite, int index) {
+void Scene::addSprite(Sprite* newSprite, int index) {
     assert(orderArrIndex.size() == orderArrType.size() && "the vectors for print order arent the same q,fhjiafhuiwq");
     assert(index >= 0 && static_cast<size_t>(index) <= orderArrIndex.size() && "index you put in is crap");
 
@@ -117,7 +118,7 @@ void Scene::draw() const {
                 BeginMode3D(cam);
                 in3DMode = true;
             }
-            objects[idx].draw();
+            objects[idx]->draw();
         }
         else if (type == 1) { //2D
             assert(idx >= 0 && static_cast<size_t>(idx) < sprites.size() && "Sprite index out of bounds");
@@ -125,7 +126,7 @@ void Scene::draw() const {
                 EndMode3D();
                 in3DMode = false;
             }
-            sprites[idx].draw();
+            sprites[idx]->draw();
         }
         else if (type == 2) { //2D
             assert(idx >= 0 && static_cast<size_t>(idx) < text.size() && "Text index out of bounds");
@@ -137,7 +138,7 @@ void Scene::draw() const {
             DrawTextEx(t.font, t.content.c_str(), t.pos, t.fontSize, t.spacing, t.color);
         }
         else {
-            assert(false && "No clue man");
+            assert(false && "No clue man, how did this even run???");
         }
     }
 

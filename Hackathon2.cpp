@@ -1,11 +1,13 @@
-﻿#include "raylib.h"
+﻿/*#include "raylib.h"
 #include "Scene.h"
 #include "Object.h"
 #include "Sprite.h"
 #include "Text.h"
 #include<iostream>
 int main() {
-    //ChangeDirectory(GetApplicationDirectory());//got this from the ai overview  needed an absolute path before(it didnt work)
+    //ChangeDirectory(GetApplicationDirectory());//got this from the ai overview  needed an absolute path before because 
+    //the default directiory was weird(it didnt work)
+
  //  std::cout<< GetWorkingDirectory();
     //the paths are broken just fix later
 
@@ -16,7 +18,7 @@ int main() {
 
     // make da camera
     Camera3D cam = { 0 };
-    cam.position = { 40.0f, 40.0f, 40.0f };
+    cam.position = { 4.0f, 4.0f, 4.0f };
     cam.target = { 0.0f, 0.5f, 0.0f };
     cam.up = { 0.0f, 1.0f, 0.0f };
     cam.fovy = 45.0f;
@@ -26,11 +28,11 @@ int main() {
     Scene myScene(cam, BLACK);
 
     //  source for models https://github.com/rbarril75/Scratched-Blue-Teapot/blob/master/blue.jpg https://github.com/raysan5/raylib/blob/master/examples/models/resources/models/obj/castle.obj
-    Object modelObj("C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\model.obj", "C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\texture.png", { 0.0f, 0.0f, 0.0f }, 1.0f);
+    Object modelObj("C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\johnny-depp\\model.obj", "C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\johnny-depp\\model_texture.jpg", { 0.0f, 0.0f, 0.0f }, 10.0f);
     myScene.addObject(modelObj);
 
     // load stuff again 2d stuff this time
-    Texture2D spriteTex = LoadTexture("assets\\sprite.png");
+    Texture2D spriteTex = LoadTexture("C:\\Users\\Lev\\Desktop\\Hackathon2\\Hackathon2\\assets\\sprite.png");
     Sprite hudSprite(spriteTex, { 20.0f, 80.0f }, 1.0f, 0.0f, WHITE);
     myScene.addSprite(hudSprite);
 
@@ -61,3 +63,4 @@ int main() {
     CloseWindow();
     return 0;
 }
+*/

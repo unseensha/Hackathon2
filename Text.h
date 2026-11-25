@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include<string>
 
-struct Text {
+struct Text {//just a quick agregate to store text info
     Color color;
     Vector2 pos;
     std::string content;

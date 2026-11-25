@@ -6,8 +6,17 @@
 #include "raylib.h"
 #include "Sprite.h"
 class Scene {
-	std::vector<Object> objects;
-	std::vector<Sprite> sprites;
+	
+
+	std::vector<Object*> objects;// this is a pointer because the game kept on crashing and its because
+	//I somehow didnt notice im copying like 10 already loaded 3d models into this so now its a pointer too. when working 
+	// with more than one 3d model this is basically required so i needed to use pointers unfortunatly
+
+	std::vector<Sprite*> sprites;// made a subclass of sprite is now since theyre store by value it will break so
+	//this also means I have to have the actual sprites outlive this or there will be a dropped pointer 
+	// again this is to prevent the subclass from turning into its parent
+	
+	//WHEN YOU WORK WITH THIS THERE IS RISK OF STUFF UNLOADING MAKE THE SPRITE OUTLAST THE SCENE AND OBJECT
 	std::vector<Text> text;
 
 	std::vector<int> orderArrIndex;//this one says the index at which youe object is in and the further up the faster you want it loaded
@@ -19,7 +28,7 @@ class Scene {
 
 
 public:
-	Scene(const std::vector<Object>& objects, const std::vector<Sprite>& twoDimensionalObjects,
+	Scene(const std::vector<Object*>& objects, const std::vector<Sprite*>& twoDimensionalObjects,
 		const std::vector<Text>& text, const std::vector<int>& orderArrIndex,
 		const std::vector<int>& orderArrType, const Camera& cam, Color background = WHITE);
 
@@ -30,11 +39,11 @@ public:
 	void addText(const Text& newText, int index); //you can pick the index where it will be printed 
 	
 
-	void addObject(const Object& newObj);
-	void addObject(const Object& newObj,int index);
+	void addObject( Object* newObj);
+	void addObject( Object* newObj,int index);
 
-	void addSprite(const Sprite& newSprite);
-	void addSprite(const Sprite& newSprite,int index);
+	void addSprite( Sprite* newSprite);
+	void addSprite( Sprite* newSprite,int index);
 
 
 

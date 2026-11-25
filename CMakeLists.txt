@@ -1,6 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.20)
 project(hackathon C CXX)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -13,11 +14,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 add_executable(Hackathon2
-    Hackathon2.cpp
     main.cpp
     Traveler.cpp
     Scene.cpp
     Object.cpp
+    Button.cpp
     
- "Object.cpp" "Object.h" "Scene.h" "Scene.cpp" "Text.h"  "Sprite.h" )
+)
 target_link_libraries(Hackathon2 PRIVATE raylib)

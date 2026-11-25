@@ -26,7 +26,7 @@ Object::Object(const std::string& objPath, const std::string& texPath, Vector3 p
 
 
 }
-
+//raylib loads models on the heap so I used a destructor to stop a memory leak, prob doesnt fully work but its good enough plus no smart pointers
 Object::~Object() {
     UnloadTexture(tex);
     UnloadModel(model);

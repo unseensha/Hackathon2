@@ -19,8 +19,11 @@ public:
         rotation(rotation),
         tint(tint) {
     }
-
-    void draw() const {
+    virtual ~Sprite() {
+        UnloadTexture(tex);
+    }
+    virtual void draw() const {//virtual just means the class that inherits sprite can change 
+        //this function and overidde it, done for button so it draws the text and the sprite
         DrawTextureEx(tex, pos, rotation, scale, tint);
     }
 
@@ -34,6 +37,8 @@ public:
     float getScale() const { return scale; }
     float getRotation() const { return rotation; }
     Color getTint() const { return tint; }
+    Texture2D getTexture() const { return tex; }
+
 };
 
 #endif
