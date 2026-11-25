@@ -1,3 +1,18 @@
+// Game idea inspired by "Papers, Please" by Lucas Pope 
+// Theme: Crawford & Joler, "Calculating Empires", https://calculatingempires.net/
+// Font: https://fonts.google.com/
+// Music: https://pixabay.com/music/search/detective/
+// raylib functions: https://www.raylib.com/cheatsheet/raylib_cheatsheet_v5.5.pdf
+
+// 3D Modules citations:
+// https://sketchfab.com/3d-models/sonya-9486429b08004768be0811402d439245 by Sonya
+// https://sketchfab.com/3d-models/supportitseez3dcom-590385a31bb541fa99baa1e07d783ac7 by itseez3d
+// https://sketchfab.com/3d-models/arnaud-from-mapado-056c52620bc94d369bdae94be26d8e3e by 3D Selfie
+// https://sketchfab.com/3d-models/julien-d-from-mapado-408242104978456286f53174b221452d by 3D Selfie
+// https://sketchfab.com/3d-models/537-0d37f50871f74c6f939e55be512913c2 by nbarnea1
+// https://sketchfab.com/3d-models/johnny-depp-52fa8f620415487fa2d11a2d9a72de46 by tipatat
+
+
 #include "raylib.h"
 #include "Scene.h"
 #include "Object.h"
