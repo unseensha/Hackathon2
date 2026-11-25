@@ -1,9 +1,10 @@
+// Citations:
+
 // Game idea inspired by "Papers, Please" by Lucas Pope 
 // Theme: Crawford & Joler, "Calculating Empires", https://calculatingempires.net/
 // Font: https://fonts.google.com/
 // Music: https://pixabay.com/music/search/detective/
 // raylib functions: https://www.raylib.com/cheatsheet/raylib_cheatsheet_v5.5.pdf
-
 // 3D Modules citations:
 // https://sketchfab.com/3d-models/sonya-9486429b08004768be0811402d439245 by Sonya
 // https://sketchfab.com/3d-models/supportitseez3dcom-590385a31bb541fa99baa1e07d783ac7 by itseez3d
@@ -37,11 +38,12 @@ const Color COLOR_BAR = { 10, 22, 34, 255 };
 const Color COLOR_COUNTER = { 92, 64, 44, 255 };
 const Color COLOR_COUNTER_TOP = { 120, 86, 60, 255 };
 
+Font gameFont;   // The font used by the whole game
 
 // helpers from Run.cpp which was the code we had in the presentation
 
 void drawText(const char* text, int x, int y, int size, Color color) {
-    DrawTextEx(GetFontDefault(), text, Vector2{ (float)x, (float)y }, (float)size, 1, color);
+    DrawTextEx(gameFont, text, Vector2{ (float)x, (float)y }, (float)size, 1, color);
 }
 
 void sCircle(int cx, int cy, float s, float dx, float dy, float r, Color c) {
@@ -150,11 +152,34 @@ Vector3 screenToWorld(float px, float py, const Camera3D& cam) {
              0.0f };
 }
 
+
+
 int main() {
     const int screenWidth = 1280;
     const int screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Scene Render Test");
     SetTargetFPS(60);
+
+    // music 
+    InitAudioDevice();
+    const char* musicPath = "assets/music.mp3";
+    if (!FileExists(musicPath)) musicPath = "music.mp3";
+    Music music = LoadMusicStream(musicPath);
+    bool musicLoaded = IsMusicValid(music);
+    if (musicLoaded) {
+        SetMusicVolume(music, 0.5f);
+        PlayMusicStream(music);
+    }
+
+    // font
+    gameFont = GetFontDefault();
+    bool fontLoaded = false;
+    const char* fontPath = "assets/font.ttf";
+    if (FileExists(fontPath)) {
+        gameFont = LoadFontEx(fontPath, 64, NULL, 0);
+        SetTextureFilter(gameFont.texture, TEXTURE_FILTER_BILINEAR);
+        fontLoaded = true;
+    }
 
     Camera3D cam = { 0 };
     cam.position = { 1.0f, 1.0f, 40.0f };
@@ -165,22 +190,30 @@ int main() {
 
     { // inner scope so everything is destroyed before close window runs cleans stuff up
 
-        const float MODEL_SCALE = 16.0f;  //use these to control the current model and add more for each new model
+        const float MODEL_SCALE = 40.0f;  //use these to control the current model and add more for each new model
         const float MODEL_SCREEN_X = 320;  
         const float MODEL_SCREEN_Y = 400;  
 
-        //all the 3d models go here
+        // all the 3d models go here 
         Object people[] = {
-            { "assets\\johnny-depp\\model.obj", "assets\\johnny-depp\\model_texture.jpg",{ 0.0f, 0.0f, 0.0f }, MODEL_SCALE }
-            
+            { "assets\\johnny-depp\\model.obj",           "assets\\johnny-depp\\model_texture.jpg",            { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\46\\scene.glb",                    "assets\\46\\model_texture.jpg",                     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\arnaud-from-mapado\\scene.glb",    "assets\\arnaud-from-mapado\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\julien-d-from-mapado\\scene.glb",  "assets\\julien-d-from-mapado\\model_texture.jpg",   { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\sonya\\scene.glb",                 "assets\\sonya\\model_texture.jpg",                  { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\supportitseez3dcom\\scene.glb",    "assets\\supportitseez3dcom\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE }
         };
 
-        // the corresponding passport for each model!!!! 
-        //THEY NEED TO BE THE SAME SIZE
+        // the passport for each model
+        // makeTraveler (name, age, nationality, passportNo, visa, woman, hair, skin, glasses, beard)
         Vector2 passportPos = { 830.0f, 100.0f };
         Sprite passports[] = {
-            makePassport(makeTraveler("Jon Dee", 45, "Veldonia", "48213", "valid",
-                                      false, BROWN, Color{ 234, 192, 134, 255 }, false, true), passportPos)
+            makePassport(makeTraveler("Jon Dee",      45, "Veldonia", "48213", "valid",   false, BROWN, Color{ 234, 192, 134, 255 }, false, true),  passportPos),
+            makePassport(makeTraveler("Sonya Reed",   29, "Marovia",  "30517", "valid",   true,  BLACK, Color{ 255, 224, 189, 255 }, false, false), passportPos),
+            makePassport(makeTraveler("Alex Moreno",  17, "Kestria",  "77120", "valid",   false, BLACK, Color{ 198, 134, 66, 255 },  true,  false), passportPos),
+            makePassport(makeTraveler("Arnaud Petit", 38, "Solenna",  "90264", "expired", false, GOLD,  Color{ 255, 224, 189, 255 }, false, false), passportPos),
+            makePassport(makeTraveler("Julien Roche", 52, "Brivland", "15893", "valid",   false, BROWN, Color{ 234, 192, 134, 255 }, true,  true),  passportPos),
+            makePassport(makeTraveler("Sam Okoye",    33, "Tarnova",  "62740", "none",    false, BLACK, Color{ 141, 85, 36, 255 },   false, false), passportPos)
         };
 
         const int personCount = sizeof(people) / sizeof(people[0]);
@@ -193,11 +226,11 @@ int main() {
         }
 
         // all the buttons for the game
-        Text startText = { WHITE,{ 0, 0 }, "START", GetFontDefault(), 40.0f, 2.0f };
-        Text endText = { WHITE,{ 0, 0 }, "END",   GetFontDefault(), 40.0f, 2.0f };
-        Text allowText = { WHITE,{ 0, 0 }, "ALLOW", GetFontDefault(), 40.0f, 2.0f };
-        Text prisonText = { WHITE,{ 0, 0 }, "PRISON", GetFontDefault(), 40.0f, 2.0f };
-        Text quitText = { WHITE,{ 0, 0 }, "QUIT",  GetFontDefault(), 30.0f, 2.0f };
+        Text startText = { WHITE,{ 0, 0 }, "START", gameFont, 40.0f, 2.0f };
+        Text endText = { WHITE,{ 0, 0 }, "END",   gameFont, 40.0f, 2.0f };
+        Text allowText = { WHITE,{ 0, 0 }, "ALLOW", gameFont, 40.0f, 2.0f };
+        Text prisonText = { WHITE,{ 0, 0 }, "PRISON", gameFont, 40.0f, 2.0f };
+        Text quitText = { WHITE,{ 0, 0 }, "QUIT",  gameFont, 30.0f, 2.0f };
 
         Button startButton(makeColorTexture(300, 100, DARKGREEN), { 490.0f, 250.0f }, 1.0f, 0.0f, WHITE, startText);
         Button endButton(makeColorTexture(300, 100, MAROON), { 490.0f, 400.0f }, 1.0f, 0.0f, WHITE, endText);
@@ -236,10 +269,12 @@ int main() {
 
         GameState state = START;//we started thge ganeamae 
         bool quit = false;
-        int current = 0;              // which person is at the checker corresponds to the indes in the objects list and corresponding passport
+        int current = 0; // which person is at the checker corresponds to the indes in the objects list and corresponding passport
         std::string feedback = "";
 
         while (!WindowShouldClose() && !quit) {
+
+            if (musicLoaded) UpdateMusicStream(music); // updates the music each frame
 
             Vector2 mouse = GetMousePosition();
             bool click = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
@@ -293,6 +328,10 @@ int main() {
             EndDrawing();
         }
     }
+
+    // closing the music
+    if (musicLoaded) UnloadMusicStream(music);
+    CloseAudioDevice();
 
     CloseWindow();
     return 0;
