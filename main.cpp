@@ -196,12 +196,12 @@ int main() {
 
         // all the 3d models go here 
         Object people[] = {
-            { "assets\\johnny-depp\\model.obj",           "assets\\johnny-depp\\model_texture.jpg",            { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
-            { "assets\\46\\scene.glb",                    "assets\\46\\model_texture.jpg",                     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
-            { "assets\\arnaud-from-mapado\\scene.glb",    "assets\\arnaud-from-mapado\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
-            { "assets\\julien-d-from-mapado\\scene.glb",  "assets\\julien-d-from-mapado\\model_texture.jpg",   { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
-            { "assets\\sonya\\scene.glb",                 "assets\\sonya\\model_texture.jpg",                  { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
-            { "assets\\supportitseez3dcom\\scene.glb",    "assets\\supportitseez3dcom\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE }
+            { "assets\\johnny-depp\\model.obj",                "assets\\johnny-depp\\model_texture.jpg",            { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\537\\model_mesh.obj",                   "assets\\537\\model_texture.jpg",                    { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\arnaud-from-mapado\\model_mesh.obj",    "assets\\arnaud-from-mapado\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\julien-d-from-mapado\\model_mesh.obj",  "assets\\julien-d-from-mapado\\model_texture.jpg",   { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\sonya\\model_mesh.obj",                 "assets\\sonya\\model_texture.jpg",                  { 0.0f, 30.0f, 100.0f }, MODEL_SCALE },
+            { "assets\\supportitseez3dcom\\model_mesh.obj",    "assets\\supportitseez3dcom\\model_texture.jpg",     { 0.0f, 30.0f, 100.0f }, MODEL_SCALE }
         };
 
         // the passport for each model
